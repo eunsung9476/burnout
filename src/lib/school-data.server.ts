@@ -2,6 +2,7 @@
 // data/ 폴더의 실제 파일을 읽습니다. 파일이 없으면 ok:false 반환.
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import Papa from "papaparse";
 import * as XLSX from "xlsx";
 import type {
@@ -14,10 +15,18 @@ import type {
 const CSV_NAME = "final_school_data.csv";
 const XLSX_NAME = "school_wide_final.xlsx";
 
+// ESM 환경에서 __dirname 대체 (Node.js ESM은 __dirname이 없음)
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
 function resolveDataPath(filename: string): string | null {
   const candidates = [
+    // 개발: 프로젝트 루트/data/
     path.join(process.cwd(), "data", filename),
+    // 프로덕션 빌드: dist/server/../data/ 또는 dist/data/
     path.join(process.cwd(), "public", "data", filename),
+    // 번들된 서버 파일 기준 상대 경로
+    path.join(__dirname, "..", "..", "data", filename),
+    path.join(__dirname, "..", "data", filename),
   ];
   for (const c of candidates) {
     try {
@@ -34,7 +43,7 @@ export function loadSchoolData(): DataResponse {
   if (!filePath) {
     return {
       ok: false,
-      error: `데이터 파일을 찾을 수 없습니다: data/${CSV_NAME}`,
+      error: `데이터 파일을 찾을 수 없습니다: data/${CSV_NAME}. 프로젝트 루트의 data/ 폴더에 파일을 넣어주세요.`,
       schools: [],
     };
   }
@@ -64,7 +73,7 @@ export function loadWideData(): WideResponse {
   if (!filePath) {
     return {
       ok: false,
-      error: `데이터 파일을 찾을 수 없습니다: data/${XLSX_NAME}`,
+      error: `데이터 파일을 찾을 수 없습니다: data/${XLSX_NAME}. 프로젝트 루트의 data/ 폴더에 파일을 넣어주세요.`,
       rows: [],
     };
   }

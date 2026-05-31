@@ -12,4 +12,9 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  nitro: {
+    // "node-server" preset: 일반 Node.js 환경(Render, Railway, Fly.io, VPS)에 배포 시 사용
+    // Cloudflare Workers에 배포하려면 이 줄을 제거하세요 (기본값: cloudflare-module)
+    preset: "node-server",
+  },
 });
