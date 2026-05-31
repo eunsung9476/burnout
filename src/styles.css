@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;900&family=Nanum+Myeongjo:wght@400;700;800&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-brand: var(--accent-red);
+  --color-brand-2: var(--accent-yellow);
+  --color-brand-3: var(--accent-blue);
+  --color-surface: var(--bg2);
+  --color-surface-2: var(--bg3);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+
+  --font-serif: "Nanum Myeongjo", serif;
+  --font-sans: "Pretendard", "Apple SD Gothic Neo", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+}
+
+:root {
+  --radius: 0.625rem;
+
+  --bg: #0a0c10;
+  --bg2: #0f1218;
+  --bg3: #151a22;
+  --accent-red: #e8533a;
+  --accent-yellow: #f5a623;
+  --accent-blue: #4a9eff;
+  --text-main: #e8e6e0;
+  --text-muted: #7a8290;
+  --text-dim: #4a5060;
+
+  --background: #0a0c10;
+  --foreground: #e8e6e0;
+  --card: #151a22;
+  --card-foreground: #e8e6e0;
+  --popover: #151a22;
+  --popover-foreground: #e8e6e0;
+  --primary: #e8533a;
+  --primary-foreground: #ffffff;
+  --secondary: #1b212b;
+  --secondary-foreground: #e8e6e0;
+  --muted: #151a22;
+  --muted-foreground: #7a8290;
+  --accent: #1b212b;
+  --accent-foreground: #e8e6e0;
+  --destructive: #e8533a;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.12);
+  --ring: #e8533a;
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    letter-spacing: -0.01em;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--bg2);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a313d;
+    border-radius: 6px;
+  }
+}
+
+@keyframes pulse-dot {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.5); opacity: 0.6; }
+}
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
